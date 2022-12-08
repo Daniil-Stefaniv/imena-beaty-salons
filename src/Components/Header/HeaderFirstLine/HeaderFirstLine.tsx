@@ -6,61 +6,11 @@ import YouTube from '../../GraphicElements/SociaIcons/YouTube';
 import AppointmentIcon from '../../GraphicElements/UserMatserContactIcons/AppointmentIcon';
 import MasterCabIcon from '../../GraphicElements/UserMatserContactIcons/MasterCabIcon';
 import UserCabIcon from '../../GraphicElements/UserMatserContactIcons/UserCabIcon';
-import HeaderFLProps, { PlaceType } from './HeaderFirstLineTypes';
+import HeaderFLProps from './HeaderFirstLineTypes';
 
 const HeaderFirstLine = ({ contactLinks }: HeaderFLProps) => {
-	const anchorGenerator = (
-		placeType: PlaceType,
-		content: string | ReactElement<HTMLDivElement>,
-		supportingStyles?: string
-	) => {
-		if (placeType === 'contacts') {
-			const contactsCommonStyle = 'text-white mr-11 text-sm font-medium';
-
-			return (
-				<a
-					className={`${contactsCommonStyle} ${supportingStyles}`}
-					href={`tel:+${contactLinks.tel}`}
-				>
-					{contactLinks.tel}
-				</a>
-			);
-		}
-
-		if (placeType === 'socials') {
-			const socialsCommonStyle = 'text-white ';
-
-			return (
-				<a
-					className={`${socialsCommonStyle} ${supportingStyles}`}
-					target="blank"
-					href={contactLinks.facebook}
-				>
-					{<Facebook />}
-				</a>
-			);
-		}
-
-		if (placeType === 'cabs') {
-			const cabsCommonStyle = 'text-white mr-11 text-sm font-medium';
-
-			return (
-				<a
-					className="text-white mr-11 text-sm font-medium"
-					href={`tel:+${contactLinks.tel}`}
-				>
-					{contactLinks.tel}
-				</a>
-			);
-		}
-		// return (
-		// 	<a
-		// 		className="text-white mr-11 text-sm font-medium"
-		// 		href={`tel:+${contactLinks.tel}`}
-		// 	>
-		// 		{contactLinks.tel}
-		// 	</a>
-		// );
+	const telMaskGenerator = (tel: string) => {
+		return `+${tel[0]} (${tel[1]}${tel[2]}${tel[3]}) ${tel[4]}${tel[5]}${tel[6]}-${tel[7]}${tel[8]}-${tel[9]}${tel[10]}`;
 	};
 
 	return (
@@ -72,7 +22,7 @@ const HeaderFirstLine = ({ contactLinks }: HeaderFLProps) => {
 							className="text-white mr-11 text-sm font-medium"
 							href={`tel:+${contactLinks.tel}`}
 						>
-							{contactLinks.tel}
+							{telMaskGenerator(contactLinks.tel)}
 						</a>
 						<a
 							className="text-white text-sm font-medium"

@@ -15,7 +15,16 @@ const Header = () => {
 					youtube: '3',
 				}}
 			/>
-			<HeaderSecondLine />
+			<HeaderSecondLine
+				navMenuItems={[
+					'О нас',
+					'Коворкинги',
+					'Франшиза',
+					'Обучение',
+					'Блог',
+					'Контакты',
+				]}
+			/>
 		</section>
 	);
 };
