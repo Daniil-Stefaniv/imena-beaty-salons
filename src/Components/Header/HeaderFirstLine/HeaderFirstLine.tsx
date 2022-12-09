@@ -1,4 +1,6 @@
 import React, { ReactElement } from 'react';
+import EnglishFlag from '../../GraphicElements/LanguagesIcons/EnglishFlag';
+import RussianIcon from '../../GraphicElements/LanguagesIcons/RussianIcon';
 import Facebook from '../../GraphicElements/SociaIcons/Facebook';
 import Instagram from '../../GraphicElements/SociaIcons/Instagram';
 import VK from '../../GraphicElements/SociaIcons/VK';
@@ -6,6 +8,7 @@ import YouTube from '../../GraphicElements/SociaIcons/YouTube';
 import AppointmentIcon from '../../GraphicElements/UserMatserContactIcons/AppointmentIcon';
 import MasterCabIcon from '../../GraphicElements/UserMatserContactIcons/MasterCabIcon';
 import UserCabIcon from '../../GraphicElements/UserMatserContactIcons/UserCabIcon';
+import Select from '../../UI/Select/Select';
 import HeaderFLProps from './HeaderFirstLineTypes';
 
 const HeaderFirstLine = ({ contactLinks }: HeaderFLProps) => {
@@ -91,16 +94,17 @@ const HeaderFirstLine = ({ contactLinks }: HeaderFLProps) => {
 						</a>
 					</div>
 					<div className="">
-						<select name="" id="">
-							<option className="">
-								{/* <svg></svg> */}
-								<span>Русский</span>
-							</option>
-							<option className="">
-								{/* <svg></svg> */}
-								<span>English</span>
-							</option>
-						</select>
+						<Select
+							iconList={ 'RU': <RussianIcon />, 'EN': <EnglishFlag /> }
+							opLIst={['RU', 'EN']}
+							styles={{
+								allContainer: 'bg-green-400',
+								mainField:
+									' text-white text-sm font-medium border-b-2 border-[rgba(255,255,255,.2)]',
+								opContainer: 'bg-inherit',
+								option: 'bg-inherit text-white text-sm font-medium',
+							}}
+						/>
 					</div>
 				</div>
 			</div>

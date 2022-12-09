@@ -1,6 +1,7 @@
 import React from 'react';
 import Footer from './Footer/Footer';
 import Header from './Header/Header';
+import Select from './UI/Select/Select';
 
 function App() {
 	return (
