@@ -1,23 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
+import languageContext from './GlobalContext/GlobalContext';
 import Footer from './Footer/Footer';
 import Header from './Header/Header';
-import Select from './UI/Select/Select';
 
 function App() {
+	const [selectedLanguage, setSelectedLanguage] = useState('RU');
+
 	return (
-		<div className="App">
-			<div className=" w-full overflow-x-hidden">
-				<header>
-					<Header />
-				</header>
-				<main>
-					<div className="h-[300px]"></div>
-				</main>
-				<footer>
-					<Footer />
-				</footer>
+		<languageContext.Provider
+			value={{ selectedLanguage, setSelectedLanguage }}
+		>
+			<div className="App">
+				<div className=" w-full overflow-x-hidden">
+					<header>
+						<Header />
+					</header>
+					<main>
+						<div className="h-[300px]"></div>
+					</main>
+					<footer>
+						<Footer />
+					</footer>
+				</div>
 			</div>
-		</div>
+		</languageContext.Provider>
 	);
 }
 

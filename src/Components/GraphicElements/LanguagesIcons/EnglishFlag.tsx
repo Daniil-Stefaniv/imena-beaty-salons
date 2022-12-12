@@ -2,7 +2,7 @@ import React from 'react';
 
 const EnglishFlag = () => {
 	return (
-		<div>
+		<div className="mr-2">
 			<svg
 				width="11"
 				height="9"
@@ -13,7 +13,7 @@ const EnglishFlag = () => {
 				<rect width="11" height="9" fill="#001974" />
 				<mask
 					id="mask0_6405_12666"
-					style="mask-type:alpha"
+					style={{ maskType: 'alpha' }}
 					maskUnits="userSpaceOnUse"
 					x="0"
 					y="0"

@@ -1,73 +1,74 @@
-import React, { useState } from 'react';
+import React, { PointerEventHandler, useEffect, useState } from 'react';
 import RandomKey from '../../../RandomKey/RandomKey';
 import SelectIcon from '../../GraphicElements/commonIcons/SelectIcon';
+import ContextForSelect from './Context/SelectContext';
 import MyOption from './Option/MyOption';
 import SelectProps from './SelectTypes';
 
-const Select = ({ opLIst, iconList, styles }: SelectProps) => {
-	const [selectedValue, setySelectedValue] = useState<string>(opLIst[0]);
+const Select = ({ opLIst, iconList, styles, handler }: SelectProps) => {
+	const [selectedValue, setSelectedValue] = useState<string>(opLIst[0]);
 	const [visibilityState, setVsisbilityState] = useState<boolean>(false);
-
-	const selectOP = () => {
-		console.log();
-	};
 
 	const visibilitySwitch: React.PointerEventHandler<HTMLDivElement> = () => {
 		visibilityState ? setVsisbilityState(false) : setVsisbilityState(true);
 	};
 
-	console.log(visibilityState);
+	useEffect(() => handler(selectedValue), [selectedValue]);
 
 	return (
-		<div>
-			<div
-				tabIndex={0}
-				onBlurCapture={() => {
-					setVsisbilityState(false);
-				}}
-				className={
-					styles.allContainer
-						? `relative ${styles.allContainer}`
-						: 'relative '
-				}
-			>
+		<ContextForSelect.Provider
+			value={{ selectedValue, setSelectedValue, setVsisbilityState }}
+		>
+			<div>
 				<div
-					onPointerUp={visibilitySwitch}
-					className={`flex items-center select-none w-full px-5 z-50 shadow-sm cursor-pointer ${styles.mainField}`}
-				>
-					<span className=" mr-[13px]">{selectedValue}</span>
-					<span
-						className={
-							visibilityState
-								? ' transition-all rotate-180'
-								: ' transition-all'
-						}
-					>
-						<SelectIcon />
-					</span>
-				</div>
-
-				<ul
+					tabIndex={0}
+					onBlurCapture={() => {
+						setVsisbilityState(false);
+					}}
 					className={
-						visibilityState
-							? `w-full transition-all absolute z-40 ${styles.opContainer}`
-							: `w-full transition-all absolute opacity-0 -z-50 ${styles.opContainer}`
+						styles.allContainer
+							? `relative ${styles.allContainer}`
+							: 'relative '
 					}
 				>
-					{opLIst.map((op: string) => {
-						return (
-							<MyOption
-								handler={selectOP}
-								key={RandomKey()}
-								icon={iconList ? iconList[op] : undefined}
-								value={op}
-								style={styles.option}
-							/>
-						);
-					})}
-				</ul>
+					<div
+						onPointerUp={visibilitySwitch}
+						className={`flex items-center select-none w-full px-5 z-50 shadow-sm cursor-pointer ${styles.mainField}`}
+					>
+						{iconList ? iconList[selectedValue] : undefined}
+						<span className=" mr-[13px]">{selectedValue}</span>
+						<span
+							className={
+								visibilityState
+									? ' transition-all rotate-180'
+									: ' transition-all'
+							}
+						>
+							<SelectIcon />
+						</span>
+					</div>
+
+					<ul
+						className={
+							visibilityState
+								? `w-full transition-all absolute z-40 ${styles.opContainer}`
+								: `w-full transition-all absolute opacity-0 -z-50 ${styles.opContainer}`
+						}
+					>
+						{opLIst.map((op: string) => {
+							return (
+								<MyOption
+									key={RandomKey()}
+									Icon={iconList ? iconList[op] : undefined}
+									value={op}
+									style={styles.option}
+								/>
+							);
+						})}
+					</ul>
+				</div>
 			</div>
-		</div>
+		</ContextForSelect.Provider>
 	);
 };
 

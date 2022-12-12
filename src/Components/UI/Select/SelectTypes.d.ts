@@ -1,6 +1,8 @@
+import { ReactElement } from 'react';
 export default interface SelectProps {
 	opLIst: string[];
-	iconList?: { [key: string]: HTMLDivElement };
+	iconList?: { [key: string]: ReactElement<HTMLDivElement> };
+	handler: CallableFunction;
 	styles: {
 		allContainer?: string;
 		mainField: string;

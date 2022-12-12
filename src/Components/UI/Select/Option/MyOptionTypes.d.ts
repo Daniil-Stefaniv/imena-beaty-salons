@@ -1,8 +1,7 @@
-import { ReactElement } from 'react';
+import { ReactElement, SyntheticEvent } from 'react';
 
 export default interface MyOptionProps {
 	value: string;
-	icon?: HTMLDivElement<SVGElement>;
-	handler: React.PointerEventHandler<HTMLLIElement>;
+	Icon?: HTMLDivElement<SVGElement>;
 	style: string;
 }

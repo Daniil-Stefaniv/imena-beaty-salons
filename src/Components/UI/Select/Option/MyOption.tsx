@@ -1,13 +1,24 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import MyOptionProps from './MyOptionTypes';
+import ContextForSelect from '../Context/SelectContext';
 
-const MyOption = ({ value, icon, handler, style }: MyOptionProps) => {
+const MyOption = ({ value, Icon, style }: MyOptionProps) => {
+	const { setSelectedValue, setVsisbilityState } =
+		useContext(ContextForSelect);
+	const selectOp = () => {
+		setSelectedValue(value);
+		setVsisbilityState(false);
+	};
+
 	return (
-		<li
-			className={` select-none cursor-pointer w-full bg-inherit px-5 py-3 ${style}`}
-			onPointerUp={handler}
-		>
-			{value}
+		<li>
+			<div
+				className={`flex items-center  select-none cursor-pointer w-full bg-inherit px-5 pt-2 last:pb-2 ${style}`}
+				onPointerUp={selectOp}
+			>
+				{Icon}
+				{value}
+			</div>
 		</li>
 	);
 };

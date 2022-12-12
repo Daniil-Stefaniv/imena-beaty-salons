@@ -1,19 +1,31 @@
-import React, { ReactElement } from 'react';
+import React, { useContext } from 'react';
+import RandomKey from '../../../RandomKey/RandomKey';
+import languageContext from '../../GlobalContext/GlobalContext';
 import EnglishFlag from '../../GraphicElements/LanguagesIcons/EnglishFlag';
 import RussianIcon from '../../GraphicElements/LanguagesIcons/RussianIcon';
-import Facebook from '../../GraphicElements/SociaIcons/Facebook';
-import Instagram from '../../GraphicElements/SociaIcons/Instagram';
-import VK from '../../GraphicElements/SociaIcons/VK';
-import YouTube from '../../GraphicElements/SociaIcons/YouTube';
-import AppointmentIcon from '../../GraphicElements/UserMatserContactIcons/AppointmentIcon';
-import MasterCabIcon from '../../GraphicElements/UserMatserContactIcons/MasterCabIcon';
-import UserCabIcon from '../../GraphicElements/UserMatserContactIcons/UserCabIcon';
 import Select from '../../UI/Select/Select';
+import { interactionDataType, socialData } from '../HeaderTypes';
 import HeaderFLProps from './HeaderFirstLineTypes';
 
-const HeaderFirstLine = ({ contactLinks }: HeaderFLProps) => {
+const HeaderFirstLine = ({
+	contactLinks,
+	socialList,
+	clientMasterIntList,
+}: HeaderFLProps) => {
+	const { selectedLanguage ,setSelectedLanguage } =
+		useContext(languageContext);
+
+	const socials: socialData[] = Object.values(socialList);
+
 	const telMaskGenerator = (tel: string) => {
 		return `+${tel[0]} (${tel[1]}${tel[2]}${tel[3]}) ${tel[4]}${tel[5]}${tel[6]}-${tel[7]}${tel[8]}-${tel[9]}${tel[10]}`;
+	};
+
+	const clientMasterIntData: interactionDataType[] =
+		Object.values(clientMasterIntList);
+
+	const languageSwitch = (newVal: string) => {
+		setSelectedLanguage(newVal);
 	};
 
 	return (
@@ -22,13 +34,13 @@ const HeaderFirstLine = ({ contactLinks }: HeaderFLProps) => {
 				<div className="flex w-full">
 					<div className=" border-r-2 border-[rgba(255,255,255,.2)] mr-14 pr-14">
 						<a
-							className="text-white mr-11 text-sm font-medium"
+							className="transition-all border-b-2 border-transparent hover:border-[#ED6B6A] text-white mr-11 text-sm font-medium"
 							href={`tel:+${contactLinks.tel}`}
 						>
 							{telMaskGenerator(contactLinks.tel)}
 						</a>
 						<a
-							className="text-white text-sm font-medium"
+							className="transition-all border-b-2 border-transparent hover:border-[#ED6B6A] text-white text-sm font-medium"
 							href={`mailto:${contactLinks.mail}`}
 						>
 							{contactLinks.mail}
@@ -36,73 +48,63 @@ const HeaderFirstLine = ({ contactLinks }: HeaderFLProps) => {
 					</div>
 
 					<div className=" flex mr-auto">
-						<a
-							className="text-white mr-[50px]"
-							target="blank"
-							href={contactLinks.facebook}
-						>
-							{<Facebook />}
-						</a>
-						<a
-							className="text-white mr-[50px]"
-							target="blank"
-							href={contactLinks.vk}
-						>
-							{<VK />}
-						</a>
-						<a
-							className="text-white mr-[50px]"
-							target="blank"
-							href={contactLinks.instagram}
-						>
-							{<Instagram />}
-						</a>
-						<a
-							className="text-white "
-							target="blank"
-							href={contactLinks.youtube}
-						>
-							{<YouTube />}
-						</a>
+						{socials.map((social: socialData, idx: number) => {
+							return (
+								<a
+									key={RandomKey()}
+									className={
+										idx < socials.length - 1
+											? ' transition-all text-white border-b-2 border-transparent hover:border-[#ED6B6A]  mr-[50px]'
+											: ' transition-all text-white border-b-2 border-transparent hover:border-[#ED6B6A] '
+									}
+									target="blank"
+									href={social.link}
+								>
+									{social.icon}
+								</a>
+							);
+						})}
 					</div>
 				</div>
+
 				<div className="flex">
 					<div className="flex border-r-2 border-[rgba(255,255,255,.2)] pr-11 mr-11">
-						<a
-							href=""
-							className="flex items-center text-white mr-10"
-						>
-							{<UserCabIcon classes={'mr-[10px]'} />}
-							<span className=" whitespace-nowrap text-xs font-medium">
-								Кабинет клиента
-							</span>
-						</a>
-						<a
-							href=""
-							className="flex items-center text-white mr-10"
-						>
-							{<MasterCabIcon classes={'mr-[10px]'} />}
-							<span className="whitespace-nowrap text-xs font-medium">
-								Кабинет мастера
-							</span>
-						</a>
-						<a href="" className="flex items-center text-white">
-							{<AppointmentIcon classes={'mr-[10px]'} />}
-							<span className="whitespace-nowrap text-xs font-medium">
-								Онлайн-запись
-							</span>
-						</a>
+						{clientMasterIntData.map(
+							(el: interactionDataType, idx: number) => {
+								return (
+									<a
+										key={RandomKey()}
+										href={el.link}
+										className={
+											idx < clientMasterIntData.length - 1
+												? 'flex items-center transition-all text-white border-b-2 border-transparent hover:border-[#ED6B6A] mr-10'
+												: 'flex items-center transition-all text-white border-b-2 border-transparent hover:border-[#ED6B6A]'
+										}
+									>
+										{el.icon}
+										<span className=" whitespace-nowrap text-xs font-medium">
+											{el.content}
+										</span>
+									</a>
+								);
+							}
+						)}
 					</div>
 					<div className="">
 						<Select
-							iconList={ 'RU': <RussianIcon />, 'EN': <EnglishFlag /> }
+							iconList={{
+								RU: <RussianIcon />,
+								EN: <EnglishFlag />,
+							}}
+							handler={languageSwitch}
 							opLIst={['RU', 'EN']}
 							styles={{
-								allContainer: 'bg-green-400',
+								allContainer: '',
 								mainField:
-									' text-white text-sm font-medium border-b-2 border-[rgba(255,255,255,.2)]',
-								opContainer: 'bg-inherit',
-								option: 'bg-inherit text-white text-sm font-medium',
+									'transition-all hover:bg-slate-600 text-white text-sm font-medium',
+								opContainer:
+									' pt-1 bg-slate-800 shadow-[0_5px_15px_5px_rgba(0,0,0,.3)]',
+								option: 'hover:bg-slate-600 bg-inherit text-white text-sm font-medium',
 							}}
 						/>
 					</div>

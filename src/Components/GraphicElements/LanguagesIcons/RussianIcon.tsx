@@ -2,7 +2,7 @@ import React from 'react';
 
 const RussianIcon = () => {
 	return (
-		<div>
+		<div className="mr-2">
 			<svg
 				width="11"
 				height="9"
