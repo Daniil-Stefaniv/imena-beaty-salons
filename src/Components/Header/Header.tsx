@@ -57,13 +57,21 @@ const Header = () => {
 		},
 	};
 
-	const navMenuItemsList = [
-		'О нас',
+	const navMenuItemsListRu = [
 		'Коворкинги',
 		'Франшиза',
 		'Обучение',
 		'Блог',
 		'Контакты',
+	];
+
+	const navMenuItemsListEn = [
+		'About us',
+		'Coworkings',
+		'Franchise',
+		'Teaching',
+		'Blog',
+		'Contacts',
 	];
 
 	return (
@@ -73,7 +81,13 @@ const Header = () => {
 				socialList={socialList}
 				clientMasterIntList={clientMasterInteraction}
 			/>
-			<HeaderSecondLine navMenuItems={navMenuItemsList} />
+			<HeaderSecondLine
+				navMenuItems={
+					selectedLanguage === 'RU'
+						? navMenuItemsListRu
+						: navMenuItemsListEn
+				}
+			/>
 		</section>
 	);
 };

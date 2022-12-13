@@ -12,8 +12,7 @@ const HeaderFirstLine = ({
 	socialList,
 	clientMasterIntList,
 }: HeaderFLProps) => {
-	const { selectedLanguage ,setSelectedLanguage } =
-		useContext(languageContext);
+	const { setSelectedLanguage } = useContext(languageContext);
 
 	const socials: socialData[] = Object.values(socialList);
 
