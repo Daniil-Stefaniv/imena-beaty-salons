@@ -3,7 +3,7 @@ import DropDownOptionProps from './DropDownOptionTypes';
 
 const DropDownOption = ({ value, link, style }: DropDownOptionProps) => {
 	return (
-		<li>
+		<li className={`${style}`}>
 			<a href={link}>{value}</a>
 		</li>
 	);

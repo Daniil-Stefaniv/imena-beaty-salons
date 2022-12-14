@@ -25,9 +25,9 @@ const DropDown = ({ dropDownName, opList, styles }: DropDownProps) => {
 				onBlur={dropDownClose}
 				onPointerOver={dropDownOpen}
 				onPointerLeave={dropDownClose}
-				className={`flex items-center ${styles.dropDownMain}`}
+				className={` cursor-default flex items-center ${styles.dropDownMain}`}
 			>
-				<span className="mr-2">{dropDownName}</span>
+				<span className="mr-2 pb-2">{dropDownName}</span>
 				<span
 					className={
 						dropDownVisibility
@@ -43,7 +43,7 @@ const DropDown = ({ dropDownName, opList, styles }: DropDownProps) => {
 				onPointerLeave={dropDownClose}
 				className={
 					dropDownVisibility
-						? `absolute top-full transition-all ${styles.opContainer}`
+						? `absolute top-full left-0 transition-all ${styles.opContainer}`
 						: `absolute top-full transition-all opacity-0 -z-40 ${styles.opContainer}`
 				}
 			>

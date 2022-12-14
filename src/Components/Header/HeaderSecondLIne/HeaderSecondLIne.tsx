@@ -8,7 +8,24 @@ import HeaderSecondLineProps from './HeaderSecondLIneTypes';
 const HeaderSecondLine = ({ navMenuItems }: HeaderSecondLineProps) => {
 	const { selectedLanguage } = useContext(languageContext);
 
-	// const;
+	const opList = {
+		one: {
+			link: '#',
+			content: selectedLanguage === 'RU' ? 'Один' : 'One',
+		},
+		two: {
+			link: '#',
+			content: selectedLanguage === 'RU' ? 'Два' : 'Two',
+		},
+		three: {
+			link: '#',
+			content: selectedLanguage === 'RU' ? 'Три' : 'Three',
+		},
+		four: {
+			link: '#',
+			content: selectedLanguage === 'RU' ? 'Четыре' : 'Four',
+		},
+	};
 
 	return (
 		<div className="flex items-center justify-between pl-[54px] pr-[47px] pt-[17px] pb-5">
@@ -23,23 +40,25 @@ const HeaderSecondLine = ({ navMenuItems }: HeaderSecondLineProps) => {
 							dropDownName={
 								selectedLanguage === 'RU' ? 'О нас' : 'About us'
 							}
-							opList={{}}
+							opList={opList}
 							styles={{
-								dropDownMain: ' text-white',
+								dropDownMain: ' text-white font-bold',
 								opContainer:
-									'bg-slate-800 p-6 shadow-[0_5px_15px_5px_rgba(0,0,0,.3)]',
-								DropDownOption: 'text-white',
+									'py-3 bg-slate-800 shadow-[0_5px_15px_5px_rgba(0,0,0,.3)]',
+								DropDownOption:
+									'transition-all pl-6 pr-12 py-4 text-white hover:bg-slate-400',
 							}}
 						/>
 					</li>
+
 					{navMenuItems.map((item: string, idx: number) => {
 						return (
 							<li key={RandomKey()}>
 								<a
 									className={
 										idx === navMenuItems.length - 1
-											? 'pb-2 transition-all border-b-2 border-transparent hover:border-[#ED6B6A] text-sm font-bold text-white'
-											: 'pb-2 transition-all border-b-2 border-transparent hover:border-[#ED6B6A] text-sm font-bold text-white mr-[84px]'
+											? 'pb-2  transition-all border-b-2 border-transparent hover:border-[#ED6B6A] text-sm font-bold text-white'
+											: 'pb-2  transition-all border-b-2 border-transparent hover:border-[#ED6B6A] text-sm font-bold text-white mr-[84px]'
 									}
 									href=""
 								>

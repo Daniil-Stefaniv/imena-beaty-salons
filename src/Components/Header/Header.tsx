@@ -66,7 +66,6 @@ const Header = () => {
 	];
 
 	const navMenuItemsListEn = [
-		'About us',
 		'Coworkings',
 		'Franchise',
 		'Teaching',
