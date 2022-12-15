@@ -1,6 +1,7 @@
 import React from 'react';
 import InputProps from './InputTypes';
 
+
 const Input = ({
 	type,
 	prioritet,
@@ -8,6 +9,7 @@ const Input = ({
 	placeholder,
 	name,
 	value,
+	handler,
 }: InputProps) => {
 	const styles = {
 		commonStyles:
@@ -40,6 +42,8 @@ const Input = ({
 			required
 			type={type}
 			placeholder={placeholder}
+			value={value}
+			onChange={handler}
 		/>
 	) : (
 		<input
@@ -49,6 +53,8 @@ const Input = ({
 			}`}
 			type={type}
 			placeholder={placeholder}
+			value={value}
+			onChange={handler}
 		/>
 	);
 };

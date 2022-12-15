@@ -1,11 +1,12 @@
 import React from 'react';
 import FooterFirstLine from './FooterFirstLine/FooterFirstLine';
+import FooterSecondLine from './FooterSecondLine/FooterSecondLine';
 
 const Footer = () => {
 	return (
 		<div className=" bg-slate-800">
 			<FooterFirstLine />
-			<div></div>
+			<FooterSecondLine />
 			<div></div>
 		</div>
 	);

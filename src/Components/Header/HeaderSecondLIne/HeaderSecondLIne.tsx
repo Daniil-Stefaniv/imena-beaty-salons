@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import HeaderAndFooterData from '../../../Data/Header&FooterData/Header&FooterData';
 import RandomKey from '../../../RandomKey/RandomKey';
 import languageContext from '../../GlobalContext/GlobalContext';
 import Logo from '../../GraphicElements/Logo/Logo';
@@ -8,24 +9,7 @@ import HeaderSecondLineProps from './HeaderSecondLIneTypes';
 const HeaderSecondLine = ({ navMenuItems }: HeaderSecondLineProps) => {
 	const { selectedLanguage } = useContext(languageContext);
 
-	const opList = {
-		one: {
-			link: '#',
-			content: selectedLanguage === 'RU' ? 'Один' : 'One',
-		},
-		two: {
-			link: '#',
-			content: selectedLanguage === 'RU' ? 'Два' : 'Two',
-		},
-		three: {
-			link: '#',
-			content: selectedLanguage === 'RU' ? 'Три' : 'Three',
-		},
-		four: {
-			link: '#',
-			content: selectedLanguage === 'RU' ? 'Четыре' : 'Four',
-		},
-	};
+	const { aboutUsOpList } = HeaderAndFooterData();
 
 	return (
 		<div className="flex items-center justify-between pl-[54px] pr-[47px] pt-[17px] pb-5">
@@ -40,7 +24,7 @@ const HeaderSecondLine = ({ navMenuItems }: HeaderSecondLineProps) => {
 							dropDownName={
 								selectedLanguage === 'RU' ? 'О нас' : 'About us'
 							}
-							opList={opList}
+							opList={aboutUsOpList}
 							styles={{
 								dropDownMain: ' text-white font-bold',
 								opContainer:

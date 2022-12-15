@@ -1,9 +1,40 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import languageContext from '../../GlobalContext/GlobalContext';
 import Input from '../../UI/Input/Input';
+import { formUpdateInfoFunc } from './FooterFirstLineTypes';
 
 const FooterFirstLine = () => {
+	const emptyForm = {
+		name: '',
+		mail: '',
+		text: '',
+	};
+
+	const [formData, setFormData] = useState<{ [key: string]: string }>(
+		emptyForm
+	);
+
 	const { selectedLanguage } = useContext(languageContext);
+
+	const updateFormInfo = (
+		e: formUpdateInfoFunc,
+		param: 'name' | 'mail' | 'text'
+	) => {
+		e.preventDefault();
+		const changedFromData = {
+			name: formData.name,
+			mail: formData.mail,
+			text: formData.text,
+		};
+		changedFromData[param] = e.currentTarget.value;
+		setFormData(changedFromData);
+	};
+
+	const sendForm = (e: React.SyntheticEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		const JSONFormData = JSON.stringify(formData);
+		setFormData(emptyForm);
+	};
 
 	return (
 		<div className=" border-b-2 broder-[rgba(255,255,255,.3)] px-[279px] py-11 flex">
@@ -21,7 +52,7 @@ const FooterFirstLine = () => {
 				</p>
 			</div>
 			<div className=" w-7/12">
-				<form action="">
+				<form onSubmit={sendForm} action="">
 					<div className="w-full mb-[53px] grid grid-cols-2 gap-8">
 						<Input
 							type={'text'}
@@ -32,6 +63,10 @@ const FooterFirstLine = () => {
 									: 'Your name *'
 							}
 							name={''}
+							value={formData.name}
+							handler={(e: formUpdateInfoFunc) =>
+								updateFormInfo(e, 'name')
+							}
 						/>
 						<Input
 							type={'text'}
@@ -42,6 +77,10 @@ const FooterFirstLine = () => {
 									: 'Your email *'
 							}
 							name={''}
+							value={formData.mail}
+							handler={(e: formUpdateInfoFunc) =>
+								updateFormInfo(e, 'mail')
+							}
 						/>
 					</div>
 					<textarea
@@ -52,6 +91,10 @@ const FooterFirstLine = () => {
 							selectedLanguage === 'RU'
 								? 'Напишите ваш вопрос здесь *'
 								: 'Write your question here *'
+						}
+						value={formData.text}
+						onChange={(e: formUpdateInfoFunc) =>
+							updateFormInfo(e, 'text')
 						}
 					/>
 					<div className="grid grid-cols-[1.2fr_0.8fr] grid-rows-[50px] gap-6">
