@@ -66,19 +66,22 @@ const HeaderAndFooterData = () => {
 	const aboutUsOpList = {
 		one: {
 			link: '#',
-			content: selectedLanguage === 'RU' ? 'Один' : 'One',
+			content: selectedLanguage === 'RU' ? 'Наши студии' : 'Our studios',
 		},
 		two: {
 			link: '#',
-			content: selectedLanguage === 'RU' ? 'Два' : 'Two',
+			content: selectedLanguage === 'RU' ? 'Клиентам' : 'Clients',
 		},
 		three: {
 			link: '#',
-			content: selectedLanguage === 'RU' ? 'Три' : 'Three',
+			content:
+				selectedLanguage === 'RU'
+					? 'Владельцам помещений'
+					: 'For owners of premises',
 		},
 		four: {
 			link: '#',
-			content: selectedLanguage === 'RU' ? 'Четыре' : 'Four',
+			content: selectedLanguage === 'RU' ? 'Инвесторам' : 'Investors',
 		},
 	};
 

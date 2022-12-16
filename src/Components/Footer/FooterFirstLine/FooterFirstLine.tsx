@@ -37,7 +37,7 @@ const FooterFirstLine = () => {
 	};
 
 	return (
-		<div className=" border-b-2 broder-[rgba(255,255,255,.3)] px-[279px] py-11 flex">
+		<div className=" border-b-2 border-gray-500  py-11 flex justify-between">
 			<div className=" w-[30%] mr-[10%]">
 				<span></span>
 				<h2 className=" leading-[130%]  text-[46px] font-black text-white mb-[54px]">

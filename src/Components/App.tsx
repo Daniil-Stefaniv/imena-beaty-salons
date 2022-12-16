@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import languageContext from './GlobalContext/GlobalContext';
 import Footer from './Footer/Footer';
 import Header from './Header/Header';
+import MasterCabLogin from './Pages/MasterCabinet/MasterCabLogin';
 
 function App() {
 	const [selectedLanguage, setSelectedLanguage] = useState('RU');
@@ -10,16 +11,16 @@ function App() {
 		<languageContext.Provider
 			value={{ selectedLanguage, setSelectedLanguage }}
 		>
-			<div className="App">
+			<div className="App selection:text-white selection:bg-red-400">
 				<div className=" w-full overflow-x-hidden">
 					<header>
 						<Header />
 					</header>
 					<main>
-						<div className="h-[300px]"></div>
+						<MasterCabLogin />
 					</main>
 					<footer>
-						<Footer />
+						<Footer size={'small'} />
 					</footer>
 				</div>
 			</div>
