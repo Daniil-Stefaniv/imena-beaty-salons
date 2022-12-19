@@ -13,7 +13,7 @@ const Input = ({
 }: InputProps) => {
 	const styles = {
 		commonStyles:
-			'outline-none transition-all focus-visible:border-red-400 bg-inherit border-b-2 pb-2',
+			'w-full outline-none transition-all focus-visible:border-red-400 bg-inherit border-b-2 pb-2',
 		lightBG: 'placeholder:text-[#93A0B9] text-[#173343] border-[#93A0B9]',
 		darkBG: 'placeholder:text-white text-white border-white ',
 		submit: 'cursor-pointer transition-all bg-red-400 hover:bg-red-500 active:bg-red-700 text-white w-full h-full',
