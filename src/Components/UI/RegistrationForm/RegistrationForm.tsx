@@ -10,37 +10,57 @@ const RegistrationForm = ({
 	inputsList,
 	submitText,
 }: RegistrationFormProps) => {
-	const dataTemplate: { [key: string]: string } = {};
+	const emptyForm: { [key: string]: string } = {};
 	inputsList.map(i => {
-		dataTemplate[i] = '';
+		emptyForm[i] = '';
 	});
 
-	const [formData, setFormData] = useState<{ [key: string]: string }>(
-		dataTemplate
+	const [formData, setformData] = useState<{ [key: string]: string }>(
+		emptyForm
 	);
 
-	const updateFormInfo = (e: React.ChangeEvent, param: string) => {
+	const updateFormInfo = (
+		e: React.ChangeEvent<HTMLInputElement>,
+		param: string
+	) => {
+		e.preventDefault();
+		const newData: { [key: string]: string } = {};
+
+		Object.assign(newData, formData);
+
+		newData[param] = e.target.value;
+
+		setformData(newData);
+	};
+
+	const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
-		const newData = {};
+		const JSONFormData = JSON.stringify(formData);
+
+		setformData(emptyForm);
 	};
 
 	return (
 		<form
+			onSubmit={e => submitForm(e)}
 			action=""
-			className=" w-[575px] grid gris-cols-1 justify-items-center gap-10 rounded-[90px_2px_2px_2px] px-[75px] py-[75px] shadow-[0px_10px_50px_rgba(161,189,227,0.17)]"
+			className="bg-white w-[575px] grid gris-cols-1 justify-items-center gap-10 rounded-[90px_2px_2px_2px] px-[75px] py-[75px] shadow-[0px_10px_50px_rgba(161,189,227,0.17)]"
 		>
 			{clientOrMaster === 'client' ? <ClientSwitch /> : ''}
 
 			<div className="w-[425px] grid grid-cols-1 gap-[30px]">
-				{inputsList.map(i => (
+				{inputsList.map((i: string, idx: number) => (
 					<Input
-						key={RandomKey()}
+						key={idx}
 						type={'text'}
 						theme={'light'}
 						placeholder={i}
 						name={''}
-						value={''}
+						value={formData[i]}
+						handler={(e: React.ChangeEvent<HTMLInputElement>) =>
+							updateFormInfo(e, i)
+						}
 					/>
 				))}
 			</div>
@@ -60,11 +80,18 @@ const RegistrationForm = ({
 				</a>
 			</div>
 
-			<p className=" text-center">
-				{
-					'Для регистрации вам необходимо выбрать коворкинг и отправить запрос через форму на сайте.'
-				}
-			</p>
+			{clientOrMaster === 'master' ? (
+				<p className="text-center">
+					Для регистрации вам необходимо выбрать коворкинг и отправить
+					запрос через{' '}
+					<span className="transition-all cursor-pointer text-red-400 border-b-[1px] border-red-200 hover:border-red-400 pb-[2px]">
+						форму на сайте
+					</span>
+					.
+				</p>
+			) : (
+				''
+			)}
 
 			<div className="w-full h-[60px]">
 				<Input

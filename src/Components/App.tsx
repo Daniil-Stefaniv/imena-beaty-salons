@@ -20,7 +20,7 @@ function App() {
 						<MasterCabLogin />
 					</main>
 					<footer>
-						<Footer size={'small'} />
+						<Footer size={'big'} />
 					</footer>
 				</div>
 			</div>
