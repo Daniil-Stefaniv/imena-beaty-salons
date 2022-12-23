@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import languageContext from './GlobalContext/GlobalContext';
-import Footer from './Footer/Footer';
-import Header from './Header/Header';
-import MasterCabLogin from './Pages/MasterCabinet/MasterCabLogin';
+import { Routes, Route } from 'react-router';
+import languageContext from './Components/GlobalContext/GlobalContext';
+import Footer from './Components/Footer/Footer';
+import Header from './Components/Header/Header';
+import MasterCabLogin from './Components/Pages/MasterCabinet/MasterCabLogin';
 
 function App() {
 	const [selectedLanguage, setSelectedLanguage] = useState('RU');

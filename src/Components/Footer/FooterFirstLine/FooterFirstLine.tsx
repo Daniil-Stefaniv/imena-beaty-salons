@@ -2,17 +2,21 @@ import React, { useContext, useState } from 'react';
 import languageContext from '../../GlobalContext/GlobalContext';
 import Input from '../../UI/Input/Input';
 import { formUpdateInfoFunc } from './FooterFirstLineTypes';
+import { useAppSelector } from '../../../store/MainStore';
+import { useDispatch } from 'react-redux';
+import { updateFormData } from '../../../store/FooterSlice.ts/FooterSlice';
 
 const FooterFirstLine = () => {
-	const emptyForm = {
-		name: '',
-		mail: '',
-		text: '',
-	};
+	const dispatch = useDispatch();
 
-	const [formData, setFormData] = useState<{ [key: string]: string }>(
-		emptyForm
-	);
+	const { lang } = useAppSelector(state => state.languageSlice);
+
+	const {
+		footerFormValues,
+		footerMainTitle,
+		footerMainDesc,
+		footerPlaceholders,
+	} = useAppSelector(state => state.FooterSlice);
 
 	const { selectedLanguage } = useContext(languageContext);
 
@@ -21,19 +25,30 @@ const FooterFirstLine = () => {
 		param: 'name' | 'mail' | 'text'
 	) => {
 		e.preventDefault();
+
 		const changedFromData = {
-			name: formData.name,
-			mail: formData.mail,
-			text: formData.text,
+			name: footerFormValues.name,
+			mail: footerFormValues.mail,
+			text: footerFormValues.text,
 		};
 		changedFromData[param] = e.currentTarget.value;
-		setFormData(changedFromData);
+
+		dispatch(updateFormData(changedFromData));
 	};
 
 	const sendForm = (e: React.SyntheticEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		const JSONFormData = JSON.stringify(formData);
-		setFormData(emptyForm);
+
+		const emptyForm = {
+			name: '',
+			mail: '',
+			text: '',
+		};
+
+		const JSONFormData = JSON.stringify(footerFormValues);
+		console.log(JSONFormData);
+
+		dispatch(updateFormData(emptyForm));
 	};
 
 	return (
@@ -41,14 +56,10 @@ const FooterFirstLine = () => {
 			<div className=" w-[30%] mr-[10%]">
 				<span></span>
 				<h2 className=" leading-[130%]  text-[46px] font-black text-white mb-[54px]">
-					{selectedLanguage === 'RU'
-						? 'Свяжитесь с нами'
-						: 'Contact us'}
+					{lang[0] === 'RU' ? footerMainTitle.RU : footerMainTitle.EN}
 				</h2>
 				<p className=" text-lg font-light text-white">
-					{selectedLanguage === 'RU'
-						? 'Мы будем рады проконсультировать вас по вопросам обслуживания или открытия студии в коворкинге.'
-						: 'We will offer service based on interests or in a co-working space.'}
+					{lang[0] === 'RU' ? footerMainDesc.RU : footerMainDesc.EN}
 				</p>
 			</div>
 			<div className=" w-7/12">
@@ -58,12 +69,12 @@ const FooterFirstLine = () => {
 							type={'text'}
 							theme={'dark'}
 							placeholder={
-								selectedLanguage === 'RU'
-									? 'Ваше имя *'
-									: 'Your name *'
+								lang[0] === 'RU'
+									? footerPlaceholders.name.RU
+									: footerPlaceholders.name.EN
 							}
 							name={''}
-							value={formData.name}
+							value={footerFormValues.name}
 							handler={(e: formUpdateInfoFunc) =>
 								updateFormInfo(e, 'name')
 							}
@@ -72,12 +83,12 @@ const FooterFirstLine = () => {
 							type={'text'}
 							theme={'dark'}
 							placeholder={
-								selectedLanguage === 'RU'
-									? 'Ваш email *'
-									: 'Your email *'
+								lang[0] === 'RU'
+									? footerPlaceholders.mail.RU
+									: footerPlaceholders.mail.EN
 							}
 							name={''}
-							value={formData.mail}
+							value={footerFormValues.mail}
 							handler={(e: formUpdateInfoFunc) =>
 								updateFormInfo(e, 'mail')
 							}
@@ -88,18 +99,18 @@ const FooterFirstLine = () => {
 						name="Question"
 						id=""
 						placeholder={
-							selectedLanguage === 'RU'
-								? 'Напишите ваш вопрос здесь *'
-								: 'Write your question here *'
+							lang[0] === 'RU'
+								? footerPlaceholders.text.RU
+								: footerPlaceholders.text.EN
 						}
-						value={formData.text}
+						value={footerFormValues.text}
 						onChange={(e: formUpdateInfoFunc) =>
 							updateFormInfo(e, 'text')
 						}
 					/>
 					<div className="grid grid-cols-[1.2fr_0.8fr] grid-rows-[50px] gap-6">
 						<span className=" text-xs text-white">
-							{selectedLanguage === 'RU' ? (
+							{lang[0] === 'RU' ? (
 								<>
 									Нажимая на кнопку, вы даете{' '}
 									<a
@@ -130,18 +141,12 @@ const FooterFirstLine = () => {
 							type={'submit'}
 							theme={'dark'}
 							placeholder={
-								selectedLanguage === 'RU'
-									? 'ПОДРОБНЕЕ'
-									: 'LEARN MORE'
+								lang[0] === 'RU'
+									? footerPlaceholders.submit.RU
+									: footerPlaceholders.submit.EN
 							}
 							name={''}
 						/>
-
-						{/* <input
-							className="cursor-pointer bg-red-400 px-[112px] text-white"
-							type="submit"
-							value="подробнее"
-						/> */}
 						<div></div>
 					</div>
 				</form>
