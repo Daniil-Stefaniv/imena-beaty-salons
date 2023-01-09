@@ -15,7 +15,8 @@ const FooterFirstLine = () => {
 		footerFormValues,
 		footerMainTitle,
 		footerMainDesc,
-		footerPlaceholders,
+		footerFormPlaceholders,
+		formNotice,
 	} = useAppSelector(state => state.FooterSlice);
 
 	const { selectedLanguage } = useContext(languageContext);
@@ -70,8 +71,8 @@ const FooterFirstLine = () => {
 							theme={'dark'}
 							placeholder={
 								lang[0] === 'RU'
-									? footerPlaceholders.name.RU
-									: footerPlaceholders.name.EN
+									? footerFormPlaceholders.name.RU
+									: footerFormPlaceholders.name.EN
 							}
 							name={''}
 							value={footerFormValues.name}
@@ -84,8 +85,8 @@ const FooterFirstLine = () => {
 							theme={'dark'}
 							placeholder={
 								lang[0] === 'RU'
-									? footerPlaceholders.mail.RU
-									: footerPlaceholders.mail.EN
+									? footerFormPlaceholders.mail.RU
+									: footerFormPlaceholders.mail.EN
 							}
 							name={''}
 							value={footerFormValues.mail}
@@ -100,8 +101,8 @@ const FooterFirstLine = () => {
 						id=""
 						placeholder={
 							lang[0] === 'RU'
-								? footerPlaceholders.text.RU
-								: footerPlaceholders.text.EN
+								? footerFormPlaceholders.text.RU
+								: footerFormPlaceholders.text.EN
 						}
 						value={footerFormValues.text}
 						onChange={(e: formUpdateInfoFunc) =>
@@ -112,15 +113,14 @@ const FooterFirstLine = () => {
 						<span className=" text-xs text-white">
 							{lang[0] === 'RU' ? (
 								<>
-									Нажимая на кнопку, вы даете{' '}
+									{formNotice.textBeforeLink}{' '}
 									<a
 										href=""
 										className="text-red-400 underline hover:text-red-500"
 									>
-										согласие
-									</a>{' '}
-									на обработку персональных данных и
-									соглашаетесь с политикой конфиденциальности.
+										{formNotice.textForLink}{' '}
+									</a>
+									{formNotice.textAfterLink}
 								</>
 							) : (
 								<>
@@ -142,8 +142,8 @@ const FooterFirstLine = () => {
 							theme={'dark'}
 							placeholder={
 								lang[0] === 'RU'
-									? footerPlaceholders.submit.RU
-									: footerPlaceholders.submit.EN
+									? footerFormPlaceholders.submit.RU
+									: footerFormPlaceholders.submit.EN
 							}
 							name={''}
 						/>

@@ -3,12 +3,16 @@ import FooterSlice from './FooterSlice.ts/FooterSlice';
 import { TypedUseSelectorHook, useSelector, useDispatch } from 'react-redux';
 import LanguageSlice from './LanguageSlice/LanguageSlice';
 import HeaderSlice from './HeaderSlice/HeaderSlice';
+import MasterCabSlice from './MasterCabSlice/MasterCabSlice';
+import ClientCabSlice from './ClientCabSlice/ClientCabSlice';
 
 const store = configureStore({
 	reducer: {
 		FooterSlice: FooterSlice,
 		languageSlice: LanguageSlice,
 		headerSlice: HeaderSlice,
+		masterCabSlice: MasterCabSlice,
+		clientCabSlice: ClientCabSlice,
 	},
 });
 

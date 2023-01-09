@@ -15,10 +15,10 @@ const initialState: InitialStateType = {
 	],
 
 	socials: [
-		{ link: '3', icon: 'InstagramIcon' },
-		{ link: '3', icon: 'FacebookIcon' },
-		{ link: '3', icon: 'VKIcon' },
-		{ link: '3', icon: 'YouTubeIcon' },
+		{ link: '/NotFound', icon: 'InstagramIcon' },
+		{ link: '/NotFound', icon: 'FacebookIcon' },
+		{ link: 'https://vk.com/', icon: 'VKIcon' },
+		{ link: 'https://www.youtube.com/', icon: 'YouTubeIcon' },
 	],
 
 	cabinetsAndAppointments: [
@@ -26,20 +26,22 @@ const initialState: InitialStateType = {
 			contentRU: 'Кабинет клиента',
 			contentEN: 'Client Cabinet',
 			icon: 'ClinetCabIcon',
-			link: '',
+			// eslint-disable-next-line quotes
+			link: "/Client'sLogin",
 		},
 		{
 			contentRU: 'Кабинет мастера',
 			// eslint-disable-next-line quotes
 			contentEN: "Master's office",
 			icon: 'MasterCabIcon',
-			link: '',
+			// eslint-disable-next-line quotes
+			link: "/Master'sLogin",
 		},
 		{
 			contentRU: 'Онлайн-запись',
 			contentEN: 'Online appointment',
 			icon: 'AppointmentIcon',
-			link: '',
+			link: '/',
 		},
 	],
 

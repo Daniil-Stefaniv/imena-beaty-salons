@@ -11,6 +11,7 @@ import {
 	switchTheLanguage,
 } from '../../../store/LanguageSlice/LanguageSlice';
 import AllIconsBase from '../../GraphicElements/allIconsBase';
+import { Link, NavLink } from 'react-router-dom';
 
 const HeaderFirstLine: React.FC = () => {
 	const { lang, languagesList } = useAppSelector(
@@ -32,13 +33,13 @@ const HeaderFirstLine: React.FC = () => {
 							console.log();
 
 							return (
-								<a
+								<NavLink
 									key={RandomKey()}
 									className="transition-all border-b-2 border-transparent hover:border-[#ED6B6A] text-white mr-11 text-sm font-medium"
-									href={contact.link}
+									to={contact.link}
 								>
 									{contact.value}
-								</a>
+								</NavLink>
 							);
 						})}
 					</div>
@@ -46,7 +47,7 @@ const HeaderFirstLine: React.FC = () => {
 					<div className=" flex mr-auto">
 						{socials.map((social, idx: number) => {
 							return (
-								<a
+								<Link
 									key={RandomKey()}
 									className={
 										idx < socials.length - 1
@@ -54,10 +55,10 @@ const HeaderFirstLine: React.FC = () => {
 											: ' transition-all text-white border-b-2 border-transparent hover:border-[#ED6B6A] '
 									}
 									target="blank"
-									href={social.link}
+									to={social.link}
 								>
 									{AllIconsBase[social.icon]}
-								</a>
+								</Link>
 							);
 						})}
 					</div>
@@ -67,9 +68,9 @@ const HeaderFirstLine: React.FC = () => {
 					<div className="flex border-r-2 border-[rgba(255,255,255,.2)] pr-11 mr-11">
 						{cabinetsAndAppointments.map((el, idx: number) => {
 							return (
-								<a
+								<Link
 									key={RandomKey()}
-									href={el.link}
+									to={el.link}
 									className={
 										idx < cabinetsAndAppointments.length - 1
 											? 'flex items-center transition-all text-white border-b-2 border-transparent hover:border-[#ED6B6A] mr-10'
@@ -82,7 +83,7 @@ const HeaderFirstLine: React.FC = () => {
 											? el.contentRU
 											: el.contentEN}
 									</span>
-								</a>
+								</Link>
 							);
 						})}
 					</div>

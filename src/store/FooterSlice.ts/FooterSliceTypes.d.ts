@@ -1,10 +1,11 @@
 export default interface FooterState {
 	footerMainTitle: multiLangText;
 	footerFormValues: FooterFormData;
-	footerPlaceholders: FooterPlaceholdersTypes;
+	footerFormPlaceholders: FooterPlaceholdersTypes;
 	footerMainDesc: MultiLangText;
 	copyRights: MultiLangText;
-	confidencePolicy: MultiLangText;
+	privacyPolicy: MultiLangText;
+	formNotice: formNoticeTypes;
 }
 
 export interface FooterFormData {
@@ -23,4 +24,10 @@ interface FooterPlaceholdersTypes {
 	mail: MultiLangText;
 	text: MultiLangText;
 	submit: MultiLangText;
+}
+
+interface formNoticeTypes {
+	textBeforeLink: string;
+	textForLink: string;
+	textAfterLink: string;
 }

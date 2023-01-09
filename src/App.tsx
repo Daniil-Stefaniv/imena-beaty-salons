@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import { Routes, Route } from 'react-router';
+import { Routes, Route, Link } from 'react-router-dom';
 import languageContext from './Components/GlobalContext/GlobalContext';
 import Footer from './Components/Footer/Footer';
 import Header from './Components/Header/Header';
 import MasterCabLogin from './Components/Pages/MasterCabinet/MasterCabLogin';
+import ClientCabLogin from './Components/Pages/ClientCabinet/ClientCabLogin';
+import MainPage from './Components/Pages/MainPage/MainPage';
+import Layout from './Components/Pages/Layout/Layout';
 
 function App() {
 	const [selectedLanguage, setSelectedLanguage] = useState('RU');
@@ -14,15 +17,19 @@ function App() {
 		>
 			<div className="App selection:text-white selection:bg-red-400">
 				<div className=" w-full overflow-x-hidden">
-					<header>
-						<Header />
-					</header>
-					<main>
-						<MasterCabLogin />
-					</main>
-					<footer>
-						<Footer size={'big'} />
-					</footer>
+					<Routes>
+						<Route path="/" element={<Layout />}>
+							<Route index element={<MainPage />} />
+							<Route
+								path="/Master'sLogin"
+								element={<MasterCabLogin />}
+							/>
+							<Route
+								path="/Client'sLogin"
+								element={<ClientCabLogin />}
+							/>
+						</Route>
+					</Routes>
 				</div>
 			</div>
 		</languageContext.Provider>

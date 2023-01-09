@@ -19,16 +19,16 @@ const initialState: FooterState = {
 	},
 
 	copyRights: {
-		RU: '',
-		EN: '',
+		RU: '© Imena Studios 2019 | Все права защищены',
+		EN: '© Imena Studios 2019 | All rights reserved',
 	},
 
-	confidencePolicy: {
-		RU: '',
-		EN: '',
+	privacyPolicy: {
+		RU: 'Политика конфиденциальности',
+		EN: 'Privacy policy',
 	},
 
-	footerPlaceholders: {
+	footerFormPlaceholders: {
 		name: { RU: 'Ваше имя *', EN: 'Your name *' },
 		mail: { RU: 'Ваш email *', EN: 'Your email *' },
 		text: {
@@ -36,6 +36,13 @@ const initialState: FooterState = {
 			EN: 'Write your question here *',
 		},
 		submit: { RU: 'ПОДРОБНЕЕ', EN: 'LEARN MORE' },
+	},
+
+	formNotice: {
+		textBeforeLink: 'Нажимая на кнопку, вы даете',
+		textForLink: 'согласие',
+		textAfterLink:
+			'на обработку персональных данных и соглашаетесь с политикой конфиденциальности.',
 	},
 };
 
