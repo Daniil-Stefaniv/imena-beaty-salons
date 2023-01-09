@@ -1,8 +1,8 @@
+import { optionType } from '../../../store/HeaderSlice/HeaderSliceTypes';
+
 export default interface DropDownProps {
 	dropDownName: string;
-	opList: {
-		[key: string]: DropDownOpInfo;
-	};
+	opList: optionType[];
 	styles: DropDownStyles;
 }
 

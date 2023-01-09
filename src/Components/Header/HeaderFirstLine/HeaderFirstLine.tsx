@@ -1,55 +1,53 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import RandomKey from '../../../RandomKey/RandomKey';
-import languageContext from '../../GlobalContext/GlobalContext';
 import EnglishFlag from '../../GraphicElements/LanguagesIcons/EnglishFlag';
 import RussianIcon from '../../GraphicElements/LanguagesIcons/RussianIcon';
 import Select from '../../UI/Select/Select';
-import { interactionDataType, socialData } from '../HeaderTypes';
 import HeaderFLProps from './HeaderFirstLineTypes';
+import { useAppSelector } from '../../../store/MainStore';
+import { useDispatch } from 'react-redux';
+import {
+	langType,
+	switchTheLanguage,
+} from '../../../store/LanguageSlice/LanguageSlice';
+import AllIconsBase from '../../GraphicElements/allIconsBase';
+import { Link, NavLink } from 'react-router-dom';
 
-const HeaderFirstLine = ({
-	contactLinks,
-	socialList,
-	clientMasterIntList,
-}: HeaderFLProps) => {
-	const { setSelectedLanguage } = useContext(languageContext);
+const HeaderFirstLine: React.FC = () => {
+	const { lang, languagesList } = useAppSelector(
+		store => store.languageSlice
+	);
 
-	const socials: socialData[] = Object.values(socialList);
+	const { socials, contacts, cabinetsAndAppointments } = useAppSelector(
+		store => store.headerSlice
+	);
 
-	const telMaskGenerator = (tel: string) => {
-		return `+${tel[0]} (${tel[1]}${tel[2]}${tel[3]}) ${tel[4]}${tel[5]}${tel[6]}-${tel[7]}${tel[8]}-${tel[9]}${tel[10]}`;
-	};
-
-	const clientMasterIntData: interactionDataType[] =
-		Object.values(clientMasterIntList);
-
-	const languageSwitch = (newVal: string) => {
-		setSelectedLanguage(newVal);
-	};
+	const dispatch = useDispatch();
 
 	return (
 		<div>
 			<div className=" flex items-center pl-[54px] pr-[47px] py-2 bg-[rgba(0,0,0,.2)]">
 				<div className="flex w-full">
 					<div className=" border-r-2 border-[rgba(255,255,255,.2)] mr-14 pr-14">
-						<a
-							className="transition-all border-b-2 border-transparent hover:border-[#ED6B6A] text-white mr-11 text-sm font-medium"
-							href={`tel:+${contactLinks.tel}`}
-						>
-							{telMaskGenerator(contactLinks.tel)}
-						</a>
-						<a
-							className="transition-all border-b-2 border-transparent hover:border-[#ED6B6A] text-white text-sm font-medium"
-							href={`mailto:${contactLinks.mail}`}
-						>
-							{contactLinks.mail}
-						</a>
+						{contacts.map(contact => {
+							console.log();
+
+							return (
+								<NavLink
+									key={RandomKey()}
+									className="transition-all border-b-2 border-transparent hover:border-[#ED6B6A] text-white mr-11 text-sm font-medium"
+									to={contact.link}
+								>
+									{contact.value}
+								</NavLink>
+							);
+						})}
 					</div>
 
 					<div className=" flex mr-auto">
-						{socials.map((social: socialData, idx: number) => {
+						{socials.map((social, idx: number) => {
 							return (
-								<a
+								<Link
 									key={RandomKey()}
 									className={
 										idx < socials.length - 1
@@ -57,10 +55,10 @@ const HeaderFirstLine = ({
 											: ' transition-all text-white border-b-2 border-transparent hover:border-[#ED6B6A] '
 									}
 									target="blank"
-									href={social.link}
+									to={social.link}
 								>
-									{social.icon}
-								</a>
+									{AllIconsBase[social.icon]}
+								</Link>
 							);
 						})}
 					</div>
@@ -68,26 +66,26 @@ const HeaderFirstLine = ({
 
 				<div className="flex">
 					<div className="flex border-r-2 border-[rgba(255,255,255,.2)] pr-11 mr-11">
-						{clientMasterIntData.map(
-							(el: interactionDataType, idx: number) => {
-								return (
-									<a
-										key={RandomKey()}
-										href={el.link}
-										className={
-											idx < clientMasterIntData.length - 1
-												? 'flex items-center transition-all text-white border-b-2 border-transparent hover:border-[#ED6B6A] mr-10'
-												: 'flex items-center transition-all text-white border-b-2 border-transparent hover:border-[#ED6B6A]'
-										}
-									>
-										{el.icon}
-										<span className=" whitespace-nowrap text-xs font-medium">
-											{el.content}
-										</span>
-									</a>
-								);
-							}
-						)}
+						{cabinetsAndAppointments.map((el, idx: number) => {
+							return (
+								<Link
+									key={RandomKey()}
+									to={el.link}
+									className={
+										idx < cabinetsAndAppointments.length - 1
+											? 'flex items-center transition-all text-white border-b-2 border-transparent hover:border-[#ED6B6A] mr-10'
+											: 'flex items-center transition-all text-white border-b-2 border-transparent hover:border-[#ED6B6A]'
+									}
+								>
+									{AllIconsBase[el.icon]}
+									<span className=" whitespace-nowrap text-xs font-medium">
+										{lang[0] === 'RU'
+											? el.contentRU
+											: el.contentEN}
+									</span>
+								</Link>
+							);
+						})}
 					</div>
 					<div className="">
 						<Select
@@ -95,8 +93,12 @@ const HeaderFirstLine = ({
 								RU: <RussianIcon />,
 								EN: <EnglishFlag />,
 							}}
-							handler={languageSwitch}
-							opLIst={['RU', 'EN']}
+							handler={(newVal: langType) => {
+								dispatch(
+									switchTheLanguage({ newVal: [newVal] })
+								);
+							}}
+							opLIst={languagesList}
 							styles={{
 								allContainer: '',
 								mainField:

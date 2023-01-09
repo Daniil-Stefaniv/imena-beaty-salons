@@ -1,6 +1,7 @@
 import { ReactElement } from 'react';
+import langType from '../../../store/LanguageSlice/LanguageSlice';
 export default interface SelectProps {
-	opLIst: string[];
+	opLIst: langType;
 	iconList?: { [key: string]: ReactElement<HTMLDivElement> };
 	handler: CallableFunction;
 	styles: {

@@ -3,8 +3,12 @@ import RandomKey from '../../../RandomKey/RandomKey';
 import SelectIcon from '../../GraphicElements/commonIcons/SelectIcon';
 import DropDownOption from './DropDownOption/DropDownOption';
 import DropDownProps, { DropDownOpInfo } from './DropDownTypes';
+import { optionType } from '../../../store/HeaderSlice/HeaderSliceTypes';
+import { useAppSelector } from '../../../store/MainStore';
 
 const DropDown = ({ dropDownName, opList, styles }: DropDownProps) => {
+	const { lang } = useAppSelector(state => state.languageSlice);
+
 	const [dropDownVisibility, setDropDownVisibility] =
 		useState<boolean>(false);
 
@@ -47,11 +51,11 @@ const DropDown = ({ dropDownName, opList, styles }: DropDownProps) => {
 						: `absolute top-full transition-all opacity-0 -z-40 ${styles.opContainer}`
 				}
 			>
-				{Object.values(opList).map((el: DropDownOpInfo) => {
+				{opList.map((el: optionType) => {
 					return (
 						<DropDownOption
-							key={RandomKey()}
-							value={el.content}
+							key={el.id}
+							value={lang[0] === 'RU' ? el.nameRU : el.nameEN}
 							link={el.link}
 							style={`cursor-pointer ${styles.DropDownOption}`}
 						/>
